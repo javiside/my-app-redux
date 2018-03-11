@@ -1,0 +1,68 @@
+.COutput {
+    width: 100%;
+    background-color: #fa923f;
+    color: white;
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+.CBtn {
+    width: 150px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 16px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+}
+.CBtn:hover,
+.CBtn:active {
+    background-color: #eee;
+}
+.CUl{
+    text-align: center;
+    padding: 0;
+}
+.CLi{
+    cursor: pointer;
+    width: fit-content;
+    margin: 5px auto;
+    padding: 5px;
+    list-style-type: none;
+    border: 1px solid black;
+}
+.CLi:hover{
+    background-color: red;
+}
+.CLi:hover::before{
+    font-weight: bold;
+    content: 'x ';
+}
+.CLi:hover::after{
+    font-weight: bold;
+    content: ' x';
+}
+.loader{
+    display: inline-block;
+    position: absolute;
+    border: 2px solid #f3f3f3; /* Light grey */
+    border-top: 2px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+    padding: 0;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.disable button{
+    color: gray;
+    pointer-events: none;
+}
