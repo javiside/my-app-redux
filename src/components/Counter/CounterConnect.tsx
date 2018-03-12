@@ -1,32 +1,46 @@
 import { connect } from 'react-redux';
-import Counter from './Counter';
+import Counter, { LiEventType } from './Counter';
 import * as actionCreators from '../../store/actions/index';
-import * as Type from './typings';
+import { CounterReducerState } from '../../store/reducers/counterReducer';
+import { ResultReducerState } from '../../store/reducers/resultReducer';
+import { ACCountReturnType } from '../../store/actions/counter';
+import { ACResReturnType } from '../../store/actions/results';
+
+// //////// TYPINGS/////////////////////TYPINGS////////////////////////TYPINGS//////////////////////////////
+// //////// TYPINGS/////////////////////TYPINGS////////////////////////TYPINGS//////////////////////////////
+
+// MapStateToProps interface
+interface MergedPropsType {
+  ctrReducer: CounterReducerState;
+  resReducer: ResultReducerState;
+}
+
+// Actions can be of Counter/Result type or an asynchronus function ↓ (using thunk, in this case setTimeOut) 
+type MyDispatch = (Actions: ACCountReturnType |  ACResReturnType | Function ) => void;
+type MapDtoPType = (dispatch: MyDispatch) => object; 
+
+// ////////END OF TYPINGS////////////////END OF TYPINGS//////////////////END OF TYPINGS////////////////////////
+// ////////END OF TYPINGS////////////////END OF TYPINGS//////////////////END OF TYPINGS////////////////////////
 
 // mapStateToProps holds the two reducers (and their respective stores/states)
-export const mapStateToProps = (store: Type.MergedPropsType) => {
+const mapStateToProps = (store: MergedPropsType) => {
   return {
     ctr: store.ctrReducer.counter,
     res: store.resReducer.result
   };
 };
 
-// 
-const mapDispatchToProps: Type.MapDtoPType = dispatch => {
+// mapDispatchToProps binds the component actions with the action creators
+const mapDispatchToProps: MapDtoPType = dispatch => {
   return {
     onInc: () => dispatch(actionCreators.incremet()),
     onDec: () => dispatch(actionCreators.decrement()),
     onAdd: () => dispatch(actionCreators.add(5)),
     onSub: () => dispatch(actionCreators.substract(5)),
     onStore: (element: string, id: string) => dispatch(actionCreators.storeEl(element, id)),
-    onRemove: (ev: Type.LiEventType) => dispatch(actionCreators.removeEl(ev.target.id))
+    onRemove: (ev: LiEventType) => dispatch(actionCreators.removeEl(ev.target.id))
   };
 };
 
-// Same as react-redux mergeProps function; Merging the properties to make the type checker happy 
-function mergeProps(stateProps: Object, dispatchProps: Object, ownProps: Object) {
-  return Object.assign({}, ownProps, stateProps, dispatchProps);
-}
-
 // Exporting the new Counter (Injected props and dispatches)
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Counter);
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

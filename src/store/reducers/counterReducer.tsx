@@ -1,6 +1,16 @@
 import * as actionConst from '../../store/actions/actionConst';
 import { updateObject } from '../utility';
-import { CounterReducerState, CounterActionType } from './typings';
+
+// //////// TYPINGS/////////////////////TYPINGS/////////////////////
+// Counter Reducer
+export interface CounterReducerState {
+    counter: number;
+}
+interface CounterActionType {
+  type: string;
+  value: number;
+}
+// ////////END OF TYPINGS////////////////END OF TYPINGS///////////////
 
 // Initial state/store for the counter
 const initialState: CounterReducerState = {

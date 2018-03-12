@@ -1,6 +1,21 @@
 import * as actionConst from '../../store/actions/actionConst';
 import { updateObject } from '../utility';
-import { ResultReducerState, ResultActionType } from './typings';
+
+// //////// TYPINGS/////////////////////TYPINGS/////////////////////
+// Result Reducer
+export interface ResultObject {
+  id: string;
+  value: string;
+}
+export interface ResultReducerState {
+  result: Array<ResultObject>;
+}
+interface ResultActionType {
+  type: string;
+  element: string;
+  id: string;
+}
+// ////////END OF TYPINGS////////////////END OF TYPINGS///////////////
 
 // Initial state/store for the results
 const initialState: ResultReducerState = {

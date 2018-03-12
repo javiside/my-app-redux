@@ -1,10 +1,50 @@
 import './Counter.css';
 import * as React from 'react';
-import * as Type from './typings';
+import { ResultObject } from '../../store/reducers/resultReducer';
+
+// //////// TYPINGS/////////////////////TYPINGS////////////////////////TYPINGS/////
+// Class Counter
+interface LiTaragetType extends EventTarget {
+  id: string;
+}
+export interface LiEventType extends React.MouseEvent<HTMLLIElement> {
+  target: LiTaragetType;
+}
+
+// COMPONENT PROPS:
+interface CounterProps {
+  ctr: number;
+  res: Array<ResultObject>;
+}
+
+// COMPONENT DISPATCHES: (Detached dispatches from props)
+interface CounterDispatches {
+    onClick:
+    | React.DetailedHTMLProps<
+        React.ButtonHTMLAttributes<HTMLButtonElement>,
+        HTMLButtonElement
+      >
+    | React.DetailedHTMLProps<
+        React.LiHTMLAttributes<HTMLLIElement>,
+        HTMLLIElement
+      >;
+  onInc: () => void;
+  onDec: () => void;
+  onAdd: () => void;
+  onSub: () => void;
+  onStore: (currCtr: string, id: string) => void;
+  onRemove: (ev: LiEventType) => void;
+}
+
+// COMPONENT STATE: Using a local component state to represent the fetching status
+interface CounterState {
+  fetching: boolean;
+}
+// ////////END OF TYPINGS////////////////END OF TYPINGS//////////////////END OF TYPINGS////////////////////////
 
 // Class Counter Component (props, dispatches and state are on the typings file)
-export default class Counter extends React.Component<Type.CounterProps & Type.CounterDispatches, Type.CounterState> {
-  constructor(props: Type.CounterProps & Type.CounterDispatches) {
+export default class Counter extends React.Component<CounterProps & CounterDispatches, CounterState> {
+  constructor(props: CounterProps & CounterDispatches) {
     super(props);
     this.state = { fetching: false };
     this.addCounter = this.addCounter.bind(this);
@@ -16,7 +56,7 @@ export default class Counter extends React.Component<Type.CounterProps & Type.Co
     return this.props.onStore(this.props.ctr.toString(), new Date().getTime().toString());
   }
   // Remove loader when the "server" responds
-  componentDidUpdate(prevProps: Readonly<Type.CounterProps>, prevState: Readonly<Type.CounterState>) {
+  componentDidUpdate(prevProps: Readonly<CounterProps>, prevState: Readonly<CounterState>) {
     if (prevState.fetching) {
       this.setState({ fetching: false });
     }
@@ -42,7 +82,7 @@ export default class Counter extends React.Component<Type.CounterProps & Type.Co
           ) : null
         }
         <ul className="CUl">
-          {this.props.res.map((el: Type.ResultObject) => (
+          {this.props.res.map((el: ResultObject) => (
             <li id={el.id} key={el.id} className="CLi" onClick={this.props.onRemove}>
               {el.value}
             </li>

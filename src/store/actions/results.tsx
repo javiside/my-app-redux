@@ -1,5 +1,11 @@
 import * as actionConst from './actionConst';
-import { ACResType, ThunkType } from './typings';
+
+// //////// TYPINGS/////////////////////TYPINGS////////////////////////TYPINGS////////////////
+// Action Creators types (Result)
+export interface ACResReturnType { type: string;  element: string;  id?: string; }
+type ACResType = (element: string, id?: string) => ACResReturnType;
+type ThunkType = (element: string,  id: string) => (dispatch: Function) => void;
+// ////////END OF TYPINGS////////////////END OF TYPINGS//////////////////END OF TYPINGS///////
 
 // SaveResult action is triggered after "the server" returns an answer to storeEl 
 export const saveResult: ACResType = (element: string, id: string) => {

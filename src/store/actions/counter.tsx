@@ -1,5 +1,10 @@
 import * as actionConst from './actionConst';
-import { ACCountType } from './typings';
+
+// //////// TYPINGS/////////////////////TYPINGS/////////////////////
+// Action Creators types (Counter)
+export type ACCountReturnType = { type: string, value?: number };
+type ACCountType = (value?: number) => ACCountReturnType;
+// ////////END OF TYPINGS////////////////END OF TYPINGS///////////////
 
 // Action Creators for the Counter
 export const incremet: ACCountType = () => {
