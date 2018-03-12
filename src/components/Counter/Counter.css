@@ -62,7 +62,7 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-.disable button{
+.disable button, .disable li{
     color: gray;
     pointer-events: none;
 }

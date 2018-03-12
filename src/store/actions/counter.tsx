@@ -1,26 +1,26 @@
-import * as actionTypes from './actionTypes';
-import { ACCountType } from '../../types/ACTypes';
+import * as actionConst from './actionConst';
+import { ACCountType } from './typings';
 
 // Action Creators for the Counter
 export const incremet: ACCountType = () => {
     return {
-        type: actionTypes.INC
+        type: actionConst.INC
     };
 };
 export const decrement: ACCountType = () => {
     return {
-        type: actionTypes.DEC
+        type: actionConst.DEC
     };
 };
 export const add: ACCountType = (value: number) => {
     return {
-        type: actionTypes.ADD,
+        type: actionConst.ADD,
         value: value
     };
 };
 export const substract: ACCountType = (value: number) => {
     return {
-        type: actionTypes.SUB,
+        type: actionConst.SUB,
         value: value
     };
 };

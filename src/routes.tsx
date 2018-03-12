@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Counter from './components/Counter/Counter';
+import CounterConnected from './components/Counter/CounterConnect';
 
 const routes = (
   <BrowserRouter>
     <Switch>
-      <Route path="*" component={Counter} />
+      <Route path="*" component={CounterConnected} />
     </Switch>
   </BrowserRouter>
 );

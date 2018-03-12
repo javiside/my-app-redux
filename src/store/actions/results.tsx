@@ -1,9 +1,9 @@
-import * as actionTypes from './actionTypes';
-import { ACResType, ThunkType } from '../../types/ACTypes';
+import * as actionConst from './actionConst';
+import { ACResType, ThunkType } from './typings';
 
 export const saveResult: ACResType = (element: string, id: string) => {
   return {
-    type: actionTypes.STOREEL,
+    type: actionConst.STOREEL,
     element: element,
     id: id
   };
@@ -15,7 +15,7 @@ export const storeEl: ThunkType = (element: string, id: string) => {
 };
 export const removeEl: ACResType = (element: string) => {
   return {
-    type: actionTypes.REMOVEEL,
+    type: actionConst.REMOVEEL,
     element: element
   };
 };
