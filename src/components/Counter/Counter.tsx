@@ -1,14 +1,13 @@
 import './Counter.css';
 import * as React from 'react';
-import * as Type from './CounterTypings';
+import * as Type from './typings';
 
-// Class Counter Component
+// Class Counter Component (props, dispatches and state are on the typings file)
 export default class Counter extends React.Component<Type.CounterProps & Type.CounterDispatches, Type.CounterState> {
   constructor(props: Type.CounterProps & Type.CounterDispatches) {
     super(props);
     this.state = { fetching: false };
     this.addCounter = this.addCounter.bind(this);
-    this.ShowHideLoader = this.ShowHideLoader.bind(this);
   }
   
   // Avoid using Arrow Functions on render method
@@ -16,17 +15,13 @@ export default class Counter extends React.Component<Type.CounterProps & Type.Co
     this.setState({ fetching: true });
     return this.props.onStore(this.props.ctr.toString(), new Date().getTime().toString());
   }
-
-  ShowHideLoader() {
-    return <div className="loader" />;
-  }
-  
+  // Remove loader when the "server" responds
   componentDidUpdate(prevProps: Readonly<Type.CounterProps>, prevState: Readonly<Type.CounterState>) {
     if (prevState.fetching) {
       this.setState({ fetching: false });
     }
   }
-  
+  // Component: H1 holds the counter, 4 action buttons, 1 button to store the values and the Li list of stored values
   render() {
     return (
       <div className={this.state.fetching ? 'disable' : ''}>
@@ -42,7 +37,7 @@ export default class Counter extends React.Component<Type.CounterProps & Type.Co
         {
           this.state.fetching ? (
             <span> 
-              <this.ShowHideLoader /> <strong> "Server"...</strong>
+              <div className="loader"/> <strong> "Server"...</strong>
             </span>
           ) : null
         }

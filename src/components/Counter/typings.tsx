@@ -11,10 +11,13 @@ export interface LiEventType extends React.MouseEvent<HTMLLIElement> {
   target: LiTaragetType;
 }
 
+// Properties for the Counter Component
 export interface CounterProps {
   ctr: number;
   res: Array<ResultObject>;
 }
+
+// Detached the dispatches from properties
 export interface CounterDispatches {
     onClick:
     | React.DetailedHTMLProps<
@@ -33,23 +36,17 @@ export interface CounterDispatches {
   onRemove: (ev: LiEventType) => void;
 }
 
+// Using a local component state to represent the fetching status
 export interface CounterState {
   fetching: boolean;
 }
 
-// MapStateToProps and MapDispatchToProps
-
+// MapStateToProps interface
 export interface MergedPropsType {
   ctrReducer: CounterReducerState;
   resReducer: ResultReducerState;
 }
-export const mapStateToProps = (store: MergedPropsType) => {
-  return {
-    ctr: store.ctrReducer.counter,
-    res: store.resReducer.result
-  };
-};
 
-// Actions can be of Counter/Result type or an asynchronus function ↓ (using thunk, on this case setTimeOut) 
+// Actions can be of Counter/Result type or an asynchronus function ↓ (using thunk, in this case setTimeOut) 
 type MyDispatch = (Actions: ACCountReturnType |  ACResReturnType | Function ) => void;
 export type MapDtoPType = (dispatch: MyDispatch) => object; 
